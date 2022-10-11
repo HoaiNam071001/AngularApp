@@ -12,9 +12,14 @@
             </a>
             <h2>{{ product.description }}</h2>
             <div class="price">{{ product.unitPrice | currency: "USD" }}</div>
-            <a routerLink="/products/{{ product.id }}" class="primary-btn"
-              >Add to cart</a
+
+            <button
+              (click)="addToCart(product)"
+              type="button"
+              class="btn btn-primary"
             >
+              Add to cart
+            </button>
           </div>
         </div>
         <div
@@ -29,29 +34,28 @@
 
       <div class="footer-pagination">
         <div class="row">
-          <div class="col-md-6"></div>
-          <div class="col-md-3">
+          <div class="col-md-8">
+            <ngb-pagination
+              [(page)]="thePageNumber"
+              [pageSize]="thePageSize"
+              [collectionSize]="theTotalElements"
+              (pageChange)="listProducts()"
+              [boundaryLinks]="true"
+              [maxSize]="5"
+            >
+            </ngb-pagination>
+          </div>
+
+          <div class="col-md-4">
             <div class="items">
-              <label>Item per page</label>
-              <select>
-                <option>10</option>
+              <label>Page Size:</label>
+              <select #MyPageSize (change)="doPageSize(MyPageSize.value)">
+                <option selected="true">{{ thePageSize }}</option>
+
                 <option>20</option>
                 <option>30</option>
                 <option>40</option>
               </select>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="number">1 - 10 of 100</div>
-          </div>
-          <div class="col-md-1">
-            <div class="arrows">
-              <a href="#"
-                ><i class="fa fa-angle-left" aria-hidden="true"></i
-              ></a>
-              <a href="#"
-                ><i class="fa fa-angle-right" aria-hidden="true"></i
-              ></a>
             </div>
           </div>
         </div>

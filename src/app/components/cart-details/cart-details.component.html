@@ -1,0 +1,72 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <table class="table table-bordered">
+        <tr>
+          <th width="20%">Product Image</th>
+          <th width="50%">Product Detail</th>
+          <th width="30%"></th>
+        </tr>
+        <tr *ngFor="let itemProduct of this.cartItems">
+          <td>
+            <img
+              src="{{ itemProduct.imageUrl }}"
+              class="img-responsive"
+              width="150px"
+            />
+          </td>
+          <td>
+            <p>{{ itemProduct.name }}</p>
+            <p>{{ itemProduct.unitPrice | currency: "USD" }}</p>
+          </td>
+          <td>
+            <div class="items">
+              <label>Quantity: </label>
+              <div class="d-flex justify-content-around">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  (click)="decrementQuantity(itemProduct)"
+                >
+                  -
+                </button>
+                <h3>
+                  {{ itemProduct.quantity }}
+                </h3>
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  (click)="incrementQuantity(itemProduct)"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <p>
+              Sub-total
+              {{ (itemProduct.quantity * itemProduct.unitPrice).toFixed(2) }}
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                (click)="remove(itemProduct)"
+              >
+                Remove
+              </button>
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2"></td>
+          <td>
+            <b>Total Quantity: {{ totalQuantity }}</b>
+            <p>Shipping FREE</p>
+            <b>Total Price: {{ totalPrice | currency: "USD" }}</b
+            ><br />
+            <a href="checkout-page.html" class="primary-btn">Checkout</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
