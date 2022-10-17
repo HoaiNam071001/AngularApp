@@ -63,7 +63,13 @@
             <p>Shipping FREE</p>
             <b>Total Price: {{ totalPrice | currency: "USD" }}</b
             ><br />
-            <a href="checkout-page.html" class="primary-btn">Checkout</a>
+            <a
+              routerLink="/checkout"
+              style="border-width: 1px"
+              class="btn btn-outline-primary m-2"
+            >
+              Checkout
+            </a>
           </td>
         </tr>
       </table>

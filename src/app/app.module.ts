@@ -12,6 +12,9 @@ import { SearchComponent } from './components/search/search.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +24,16 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
     ProductDetailComponent,
     CartStatusComponent,
     CartDetailsComponent,
+    CheckoutComponent,
+    LoginComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule,
+    ReactiveFormsModule,
+  ],
   providers: [ProductService],
   bootstrap: [AppComponent],
 })

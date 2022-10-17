@@ -13,10 +13,10 @@ export class ProductService {
   private categoryUrl: string = `${Url}/api/product_category`;
   constructor(private httpClient: HttpClient) {}
 
-  getProductList(theCategoryId: number): Observable<Product[]> {
-    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
-    return this.getProduct(searchUrl);
-  }
+  // getProductList(theCategoryId: number): Observable<Product[]> {
+  //   const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
+  //   return this.getProduct(searchUrl);
+  // }
 
   getProductListPaginate(
     thePage: number,
@@ -29,6 +29,7 @@ export class ProductService {
 
     return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
+
   searchPaginate(
     thePage: number,
     thePageSize: number,
@@ -40,22 +41,23 @@ export class ProductService {
 
     return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
+
   getProductCategories(): Observable<ProductCategory[]> {
     return this.httpClient
       .get<GetResponseProductCategory>(this.categoryUrl)
       .pipe(map((res) => res._embedded.productCategory));
   }
 
-  searchProducts(keyword: string): Observable<Product[]> {
-    const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${keyword}`;
-    return this.getProduct(searchUrl);
-  }
+  // searchProducts(keyword: string): Observable<Product[]> {
+  //   const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${keyword}`;
+  //   return this.getProduct(searchUrl);
+  // }
 
-  getProduct(searchUrl: string): Observable<Product[]> {
-    return this.httpClient
-      .get<GetResponseProducts>(searchUrl)
-      .pipe(map((res) => res._embedded.products));
-  }
+  // getProduct(searchUrl: string): Observable<Product[]> {
+  //   return this.httpClient
+  //     .get<GetResponseProducts>(searchUrl)
+  //     .pipe(map((res) => res._embedded.products));
+  // }
 
   getProductDetail(productId: number): Observable<Product> {
     const productUrl = `${this.baseUrl}/${productId}`;
