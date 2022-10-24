@@ -33,6 +33,8 @@ export class CheckoutComponent implements OnInit {
 
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
+
+  storage: Storage = sessionStorage;
   constructor(
     private formBuilder: FormBuilder,
     private cartService: CartService,
@@ -94,6 +96,7 @@ export class CheckoutComponent implements OnInit {
     return this.checkoutFormGroup.get('creditCard.securityCode');
   }
   createFormGroup() {
+    const theEmail = JSON.parse(this.storage.getItem('userEmail')!);
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [
@@ -106,7 +109,7 @@ export class CheckoutComponent implements OnInit {
           Validators.minLength(2),
           ShopValidators.notOnlyWhitespace,
         ]),
-        email: new FormControl('', [
+        email: new FormControl(theEmail, [
           Validators.required,
           Validators.pattern('^[a-z0-9_.]+@[a-z0-9]+\\.[a-z]{2,4}$'),
         ]),
@@ -162,7 +165,7 @@ export class CheckoutComponent implements OnInit {
         ]),
         securityCode: new FormControl('', [
           Validators.required,
-          Validators.pattern('[0-9]{16}$'),
+          Validators.pattern('[0-9]{3}'),
         ]),
         expirationMonth: [''],
         expirationYear: [''],
@@ -223,7 +226,6 @@ export class CheckoutComponent implements OnInit {
       order,
       orderItems
     );
-    console.log(purchase);
     this.checkoutService.placeOrder(purchase).subscribe({
       next: (res) => {
         console.log(

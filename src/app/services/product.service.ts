@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '../common/product';
 import { map, Observable } from 'rxjs';
 import { ProductCategory } from '../common/product-category';
-const Url = 'http://localhost:8080';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private baseUrl: string = `${Url}/api/products`;
-  private categoryUrl: string = `${Url}/api/product_category`;
+  private baseUrl: string = `${environment.shopUrl}/products`;
+  private categoryUrl: string = `${environment.shopUrl}/product_category`;
   constructor(private httpClient: HttpClient) {}
 
   // getProductList(theCategoryId: number): Observable<Product[]> {
